@@ -1,4 +1,5 @@
+import DisplayContent from "@/components/DisplayContent";
+
 export default function SubContent({ params: { subContentId } }) {
-  console.log(subContentId);
-  return <div>SubContent</div>;
+  return <DisplayContent id={subContentId} />;
 }
