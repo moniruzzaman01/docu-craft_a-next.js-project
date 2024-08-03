@@ -1,11 +1,38 @@
+"use client";
+
+import {
+  getDocumentByAuthor,
+  getDocumentByCategory,
+  getDocumentByTag,
+} from "@/utils/doc_utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Sidebar({ docs }) {
-  const rootLinks = docs.filter((doc) => !doc.parent);
-  const subLinks = Object.groupBy(
-    docs.filter((doc) => doc.parent),
-    ({ parent }) => parent
-  );
+  const [rootLinks, setRootLinks] = useState([]);
+  const [subLinks, setSubLinks] = useState({});
+  const pathName = usePathname();
+
+  useEffect(() => {
+    // const path = pathName.split("/")[2];
+    let data = docs;
+    if (pathName.includes("/authors")) {
+      data = getDocumentByAuthor(docs, pathName.split("/")[2]);
+    } else if (pathName.includes("/categories")) {
+      data = getDocumentByCategory(docs, pathName.split("/")[2]);
+    } else if (pathName.includes("/tags")) {
+      data = getDocumentByTag(docs, pathName.split("/")[2]);
+    }
+
+    const rootLinks = data.filter((doc) => !doc.parent);
+    const subLinks = Object.groupBy(
+      data.filter((doc) => doc.parent),
+      ({ parent }) => parent
+    );
+    setRootLinks([...rootLinks]);
+    setSubLinks({ ...subLinks });
+  }, [pathName]);
 
   return (
     <nav className="hidden lg:mt-10 lg:block">
