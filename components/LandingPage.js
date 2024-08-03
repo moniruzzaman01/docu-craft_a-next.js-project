@@ -33,6 +33,7 @@ export default function LandingPage() {
                 width="1600"
                 height="1280"
                 className="relative z-20 -mb-36 aspect-[853/682] max-w-[630px] rounded-xl bg-slate-200 shadow-xl shadow-black/5 ring-1 ring-slate-900/5 sm:-mb-16 lg:-mb-8 xl:-mb-16"
+                alt="banner iamge"
               />
             </div>
           </div>
