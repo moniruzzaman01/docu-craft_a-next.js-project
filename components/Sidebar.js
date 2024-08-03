@@ -30,6 +30,15 @@ export default function Sidebar({ docs }) {
       data.filter((doc) => doc.parent),
       ({ parent }) => parent
     );
+
+    Object.keys(subLinks).forEach((item) => {
+      const exist = rootLinks.find((root) => root.id == item);
+      if (!exist) {
+        const data = docs.find((doc) => doc.id == item);
+        rootLinks.push(data);
+      }
+    });
+
     setRootLinks([...rootLinks]);
     setSubLinks({ ...subLinks });
   }, [pathName]);

@@ -1,8 +1,4 @@
 export const getDocumentByAuthor = (docs, author) => {
-  console.log(
-    author,
-    docs.filter((doc) => encodeURI(doc.author) === author)
-  );
   return docs.filter((doc) => encodeURI(doc.author) === author);
 };
 
